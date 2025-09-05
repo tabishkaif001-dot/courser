@@ -1,0 +1,1233 @@
+// Course Selling Web Application JavaScript
+
+// Application Data
+let appData = {
+  "courses": [
+    {
+      "id": 1,
+      "title": "Complete Web Development Bootcamp",
+      "description": "Learn full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build 10+ real-world projects.",
+      "price": 99.99,
+      "originalPrice": 199.99,
+      "category": "Web Development",
+      "instructor": "Sarah Johnson",
+      "duration": "40 hours",
+      "lessons": 120,
+      "students": 15420,
+      "rating": 4.8,
+      "level": "Beginner",
+      "image": "/api/placeholder/400/250",
+      "featured": true,
+      "modules": [
+        "HTML & CSS Fundamentals",
+        "JavaScript Mastery",
+        "React.js Development",
+        "Node.js & Express",
+        "Database with MongoDB",
+        "Deployment & DevOps"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Python for Data Science",
+      "description": "Master Python programming for data analysis, machine learning, and visualization with pandas, numpy, and scikit-learn.",
+      "price": 79.99,
+      "originalPrice": 149.99,
+      "category": "Data Science",
+      "instructor": "Dr. Michael Chen",
+      "duration": "35 hours",
+      "lessons": 95,
+      "students": 12350,
+      "rating": 4.7,
+      "level": "Intermediate",
+      "image": "/api/placeholder/400/250",
+      "featured": true,
+      "modules": [
+        "Python Fundamentals",
+        "Data Manipulation with Pandas",
+        "Data Visualization",
+        "Machine Learning Basics",
+        "Advanced ML Algorithms",
+        "Real-world Projects"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "AI & Machine Learning Masterclass",
+      "description": "Comprehensive course covering artificial intelligence, deep learning, neural networks, and practical AI applications.",
+      "price": 149.99,
+      "originalPrice": 299.99,
+      "category": "Artificial Intelligence",
+      "instructor": "Prof. Emily Rodriguez",
+      "duration": "60 hours",
+      "lessons": 180,
+      "students": 8750,
+      "rating": 4.9,
+      "level": "Advanced",
+      "image": "/api/placeholder/400/250",
+      "featured": true,
+      "modules": [
+        "AI Fundamentals",
+        "Machine Learning Algorithms",
+        "Deep Learning & Neural Networks",
+        "Natural Language Processing",
+        "Computer Vision",
+        "AI Ethics & Applications"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Digital Marketing Complete Guide",
+      "description": "Learn SEO, social media marketing, PPC advertising, content marketing, and analytics to grow any business online.",
+      "price": 59.99,
+      "originalPrice": 119.99,
+      "category": "Digital Marketing",
+      "instructor": "Alex Thompson",
+      "duration": "25 hours",
+      "lessons": 75,
+      "students": 18200,
+      "rating": 4.6,
+      "level": "Beginner",
+      "image": "/api/placeholder/400/250",
+      "featured": false,
+      "modules": [
+        "Digital Marketing Fundamentals",
+        "SEO & Content Marketing",
+        "Social Media Marketing",
+        "Paid Advertising (PPC)",
+        "Email Marketing",
+        "Analytics & Optimization"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "React Native Mobile Development",
+      "description": "Build native mobile apps for iOS and Android using React Native, with navigation, state management, and API integration.",
+      "price": 89.99,
+      "originalPrice": 169.99,
+      "category": "Mobile Development",
+      "instructor": "David Kim",
+      "duration": "30 hours",
+      "lessons": 85,
+      "students": 9450,
+      "rating": 4.5,
+      "level": "Intermediate",
+      "image": "/api/placeholder/400/250",
+      "featured": false,
+      "modules": [
+        "React Native Setup",
+        "Components & Styling",
+        "Navigation & Routing",
+        "State Management",
+        "API Integration",
+        "App Store Deployment"
+      ]
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "Web Development", "icon": "🌐", "count": 45 },
+    { "id": 2, "name": "Data Science", "icon": "📊", "count": 32 },
+    { "id": 3, "name": "Artificial Intelligence", "icon": "🤖", "count": 28 },
+    { "id": 4, "name": "Digital Marketing", "icon": "📱", "count": 35 },
+    { "id": 5, "name": "Mobile Development", "icon": "📱", "count": 25 },
+    { "id": 6, "name": "Cybersecurity", "icon": "🔒", "count": 18 }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "password123",
+      "role": "user",
+      "avatar": "/api/placeholder/100/100",
+      "joinDate": "2024-01-15",
+      "purchasedCourses": [1, 2],
+      "progress": {
+        "1": 75,
+        "2": 30
+      }
+    },
+    {
+      "id": 2,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "avatar": "/api/placeholder/100/100",
+      "joinDate": "2023-01-01"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Jessica Williams",
+      "role": "Software Developer",
+      "content": "This platform transformed my career! The courses are incredibly detailed and practical.",
+      "rating": 5,
+      "avatar": "/api/placeholder/60/60"
+    },
+    {
+      "id": 2,
+      "name": "Mark Johnson",
+      "role": "Data Analyst",
+      "content": "Best investment I made for my professional development. Highly recommended!",
+      "rating": 5,
+      "avatar": "/api/placeholder/60/60"
+    }
+  ],
+  "stats": {
+    "totalStudents": 50000,
+    "totalCourses": 200,
+    "totalInstructors": 45,
+    "successRate": 95
+  }
+};
+
+// Application State
+let appState = {
+  currentUser: null,
+  currentView: 'homepage',
+  cart: [],
+  filteredCourses: [],
+  searchTerm: '',
+  filters: {
+    category: '',
+    level: '',
+    sort: ''
+  }
+};
+
+// Initialize Application
+document.addEventListener('DOMContentLoaded', function() {
+  initializeApp();
+});
+
+function initializeApp() {
+  // Ensure all modals are hidden initially
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.classList.add('hidden');
+  });
+  
+  // Ensure cart sidebar is hidden initially
+  document.getElementById('cartSidebar').classList.add('hidden');
+  
+  loadHomepage();
+  setupEventListeners();
+  updateNavigation();
+}
+
+function setupEventListeners() {
+  // Login Form
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+  }
+  
+  // Register Form
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', handleRegister);
+  }
+  
+  // Add Course Form
+  const addCourseForm = document.getElementById('addCourseForm');
+  if (addCourseForm) {
+    addCourseForm.addEventListener('submit', handleAddCourse);
+  }
+  
+  // Checkout Form
+  const checkoutForm = document.getElementById('checkoutForm');
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', handleCheckout);
+  }
+  
+  // Search Input
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(searchCourses, 300));
+  }
+  
+  // User menu toggle
+  const userMenuBtn = document.getElementById('userMenuBtn');
+  if (userMenuBtn) {
+    userMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const dropdown = document.getElementById('userDropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+  }
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function() {
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) {
+      dropdown.style.display = 'none';
+    }
+  });
+
+  // Add ESC key listener for closing modals
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeAllModals();
+    }
+  });
+}
+
+// Navigation Functions
+function showView(viewName) {
+  // Hide all views
+  document.querySelectorAll('.view').forEach(view => {
+    view.classList.add('hidden');
+  });
+  
+  // Show selected view
+  const targetView = document.getElementById(viewName);
+  if (targetView) {
+    targetView.classList.remove('hidden');
+    appState.currentView = viewName;
+    
+    // Load view-specific content
+    switch(viewName) {
+      case 'homepage':
+        loadHomepage();
+        break;
+      case 'catalog':
+        loadCatalog();
+        break;
+      case 'dashboard':
+        if (appState.currentUser && appState.currentUser.role === 'user') {
+          loadDashboard();
+        } else {
+          showNotification('Please login to access dashboard', 'error');
+          showLogin();
+        }
+        break;
+      case 'admin':
+        if (appState.currentUser && appState.currentUser.role === 'admin') {
+          loadAdminPanel();
+        } else {
+          showNotification('Admin access required', 'error');
+          showLogin();
+        }
+        break;
+    }
+  }
+}
+
+function updateNavigation() {
+  const navbarAuth = document.getElementById('navbarAuth');
+  const navbarUser = document.getElementById('navbarUser');
+  const navbarAdmin = document.getElementById('navbarAdmin');
+  
+  if (appState.currentUser) {
+    navbarAuth.classList.add('hidden');
+    
+    if (appState.currentUser.role === 'admin') {
+      navbarUser.classList.add('hidden');
+      navbarAdmin.classList.remove('hidden');
+    } else {
+      navbarUser.classList.remove('hidden');
+      navbarAdmin.classList.add('hidden');
+      const userNameElement = document.getElementById('userName');
+      if (userNameElement) {
+        userNameElement.textContent = appState.currentUser.name;
+      }
+    }
+  } else {
+    navbarAuth.classList.remove('hidden');
+    navbarUser.classList.add('hidden');
+    navbarAdmin.classList.add('hidden');
+  }
+  
+  updateCartCount();
+}
+
+// Authentication Functions
+function handleLogin(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const email = formData.get('email');
+  const password = formData.get('password');
+  
+  const user = appData.users.find(u => u.email === email && u.password === password);
+  
+  if (user) {
+    appState.currentUser = user;
+    hideModal('loginModal');
+    updateNavigation();
+    showNotification('Login successful!', 'success');
+    
+    if (user.role === 'admin') {
+      showView('admin');
+    } else {
+      showView('dashboard');
+    }
+  } else {
+    showNotification('Invalid email or password', 'error');
+  }
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const password = formData.get('password');
+  
+  // Check if user already exists
+  const existingUser = appData.users.find(u => u.email === email);
+  if (existingUser) {
+    showNotification('User with this email already exists', 'error');
+    return;
+  }
+  
+  // Create new user
+  const newUser = {
+    id: appData.users.length + 1,
+    name: name,
+    email: email,
+    password: password,
+    role: 'user',
+    avatar: '/api/placeholder/100/100',
+    joinDate: new Date().toISOString().split('T')[0],
+    purchasedCourses: [],
+    progress: {}
+  };
+  
+  appData.users.push(newUser);
+  appState.currentUser = newUser;
+  
+  hideModal('registerModal');
+  updateNavigation();
+  showNotification('Account created successfully!', 'success');
+  showView('dashboard');
+}
+
+function logout() {
+  appState.currentUser = null;
+  appState.cart = [];
+  updateNavigation();
+  showView('homepage');
+  showNotification('Logged out successfully', 'success');
+}
+
+// Homepage Functions
+function loadHomepage() {
+  loadFeaturedCourses();
+  loadCategories();
+  loadTestimonials();
+}
+
+function loadFeaturedCourses() {
+  const container = document.getElementById('featuredCourses');
+  if (!container) return;
+  
+  const featuredCourses = appData.courses.filter(course => course.featured);
+  container.innerHTML = featuredCourses.map(course => createCourseCard(course)).join('');
+}
+
+function loadCategories() {
+  const container = document.getElementById('categoriesGrid');
+  if (!container) return;
+  
+  container.innerHTML = appData.categories.map(category => `
+    <div class="category-card" onclick="filterByCategory('${category.name}')">
+      <div class="category-icon">${category.icon}</div>
+      <h3 class="category-name">${category.name}</h3>
+      <p class="category-count">${category.count} courses</p>
+    </div>
+  `).join('');
+}
+
+function loadTestimonials() {
+  const container = document.getElementById('testimonialsGrid');
+  if (!container) return;
+  
+  container.innerHTML = appData.testimonials.map(testimonial => `
+    <div class="testimonial-card">
+      <div class="testimonial-content">"${testimonial.content}"</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👤</div>
+        <div class="testimonial-name">${testimonial.name}</div>
+        <div class="testimonial-role">${testimonial.role}</div>
+        <div class="rating">
+          <span class="stars">${'★'.repeat(testimonial.rating)}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Course Functions
+function createCourseCard(course) {
+  return `
+    <div class="course-card" onclick="showCourseDetail(${course.id})">
+      <div class="course-image">📚 Course Image</div>
+      <div class="course-content">
+        <div class="course-header">
+          <h3 class="course-title">${course.title}</h3>
+          <p class="course-instructor">by ${course.instructor}</p>
+        </div>
+        <p class="course-description">${course.description}</p>
+        <div class="course-meta">
+          <div class="course-stats">
+            <span>⏱️ ${course.duration}</span>
+            <span>👥 ${course.students.toLocaleString()}</span>
+            <span>📊 ${course.level}</span>
+          </div>
+          <div class="rating">
+            <span class="stars">${'★'.repeat(Math.floor(course.rating))}</span>
+            <span>${course.rating}</span>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">
+            <span class="current-price">$${course.price}</span>
+            ${course.originalPrice ? `<span class="original-price">$${course.originalPrice}</span>` : ''}
+          </div>
+          <button class="btn btn--primary" onclick="event.stopPropagation(); addToCart(${course.id})">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function showCourseDetail(courseId) {
+  const course = appData.courses.find(c => c.id === courseId);
+  if (!course) return;
+  
+  const container = document.getElementById('courseDetailContent');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <div class="course-detail-header">
+      <div class="course-detail-info">
+        <h1>${course.title}</h1>
+        <div class="course-detail-meta">
+          <span>👨‍🏫 ${course.instructor}</span>
+          <span>⏱️ ${course.duration}</span>
+          <span>📚 ${course.lessons} lessons</span>
+          <span>📊 ${course.level}</span>
+          <span>👥 ${course.students.toLocaleString()} students</span>
+        </div>
+        <div class="rating">
+          <span class="stars">${'★'.repeat(Math.floor(course.rating))}</span>
+          <span>${course.rating} (${Math.floor(course.students * 0.1)} reviews)</span>
+        </div>
+        <p class="course-detail-description">${course.description}</p>
+      </div>
+      <div class="course-detail-sidebar">
+        <div class="course-detail-price">
+          <span class="current-price">$${course.price}</span>
+          ${course.originalPrice ? `<span class="original-price">$${course.originalPrice}</span>` : ''}
+        </div>
+        <button class="btn btn--primary btn--full-width" onclick="addToCart(${course.id})">
+          Add to Cart
+        </button>
+        <button class="btn btn--outline btn--full-width" onclick="buyCourse(${course.id})">
+          Buy Now
+        </button>
+      </div>
+    </div>
+    <div class="course-modules">
+      <h3>Course Curriculum</h3>
+      <div class="modules-list">
+        ${course.modules.map((module, index) => `
+          <div class="module-item">
+            <div class="module-number">${index + 1}</div>
+            <div class="module-title">${module}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  
+  showView('courseDetail');
+}
+
+// Catalog Functions
+function loadCatalog() {
+  loadCategoryFilter();
+  appState.filteredCourses = [...appData.courses];
+  displayCourses();
+}
+
+function loadCategoryFilter() {
+  const categoryFilter = document.getElementById('categoryFilter');
+  if (!categoryFilter) return;
+  
+  categoryFilter.innerHTML = '<option value="">All Categories</option>' +
+    appData.categories.map(cat => `<option value="${cat.name}">${cat.name}</option>`).join('');
+}
+
+function filterByCategory(category) {
+  const categoryFilter = document.getElementById('categoryFilter');
+  if (categoryFilter) {
+    categoryFilter.value = category;
+  }
+  appState.filters.category = category;
+  showView('catalog');
+  setTimeout(() => filterCourses(), 100); // Small delay to ensure view is loaded
+}
+
+function searchCourses() {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+  
+  const searchTerm = searchInput.value.toLowerCase();
+  appState.searchTerm = searchTerm;
+  filterCourses();
+}
+
+function filterCourses() {
+  const categoryFilter = document.getElementById('categoryFilter');
+  const levelFilter = document.getElementById('levelFilter');
+  const sortFilter = document.getElementById('sortFilter');
+  
+  const categoryValue = categoryFilter ? categoryFilter.value : '';
+  const levelValue = levelFilter ? levelFilter.value : '';
+  const sortValue = sortFilter ? sortFilter.value : '';
+  
+  appState.filters.category = categoryValue;
+  appState.filters.level = levelValue;
+  appState.filters.sort = sortValue;
+  
+  let filtered = appData.courses.filter(course => {
+    const matchesSearch = !appState.searchTerm || 
+      course.title.toLowerCase().includes(appState.searchTerm) ||
+      course.description.toLowerCase().includes(appState.searchTerm) ||
+      course.instructor.toLowerCase().includes(appState.searchTerm);
+    
+    const matchesCategory = !categoryValue || course.category === categoryValue;
+    const matchesLevel = !levelValue || course.level === levelValue;
+    
+    return matchesSearch && matchesCategory && matchesLevel;
+  });
+  
+  // Apply sorting
+  if (sortValue) {
+    filtered.sort((a, b) => {
+      switch(sortValue) {
+        case 'price-low':
+          return a.price - b.price;
+        case 'price-high':
+          return b.price - a.price;
+        case 'rating':
+          return b.rating - a.rating;
+        case 'students':
+          return b.students - a.students;
+        default:
+          return 0;
+      }
+    });
+  }
+  
+  appState.filteredCourses = filtered;
+  displayCourses();
+}
+
+function displayCourses() {
+  const container = document.getElementById('catalogCourses');
+  if (!container) return;
+  
+  if (appState.filteredCourses.length === 0) {
+    container.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary);">No courses found matching your criteria.</p>';
+    return;
+  }
+  
+  container.innerHTML = appState.filteredCourses.map(course => createCourseCard(course)).join('');
+}
+
+// Cart Functions
+function addToCart(courseId) {
+  if (!appState.currentUser) {
+    showNotification('Please login to add courses to cart', 'error');
+    showLogin();
+    return;
+  }
+  
+  const course = appData.courses.find(c => c.id === courseId);
+  const existingItem = appState.cart.find(item => item.id === courseId);
+  
+  if (existingItem) {
+    showNotification('Course already in cart', 'error');
+    return;
+  }
+  
+  if (appState.currentUser.purchasedCourses.includes(courseId)) {
+    showNotification('You already own this course', 'error');
+    return;
+  }
+  
+  appState.cart.push(course);
+  updateCartCount();
+  showNotification('Course added to cart', 'success');
+}
+
+function removeFromCart(courseId) {
+  appState.cart = appState.cart.filter(item => item.id !== courseId);
+  updateCartCount();
+  loadCartItems();
+  showNotification('Course removed from cart', 'success');
+}
+
+function updateCartCount() {
+  const cartCount = document.getElementById('cartCount');
+  if (cartCount) {
+    cartCount.textContent = appState.cart.length;
+  }
+}
+
+function toggleCart() {
+  const cartSidebar = document.getElementById('cartSidebar');
+  if (!cartSidebar) return;
+  
+  cartSidebar.classList.toggle('hidden');
+  cartSidebar.classList.toggle('open');
+  
+  if (!cartSidebar.classList.contains('hidden')) {
+    loadCartItems();
+  }
+}
+
+function loadCartItems() {
+  const container = document.getElementById('cartItems');
+  const totalElement = document.getElementById('cartTotal');
+  
+  if (!container || !totalElement) return;
+  
+  if (appState.cart.length === 0) {
+    container.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary);">Your cart is empty</p>';
+    totalElement.textContent = '0.00';
+    return;
+  }
+  
+  const total = appState.cart.reduce((sum, course) => sum + course.price, 0);
+  
+  container.innerHTML = appState.cart.map(course => `
+    <div class="cart-item">
+      <div class="cart-item-image">📚</div>
+      <div class="cart-item-info">
+        <div class="cart-item-title">${course.title}</div>
+        <div class="cart-item-price">$${course.price}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${course.id})">✕</button>
+    </div>
+  `).join('');
+  
+  totalElement.textContent = total.toFixed(2);
+}
+
+function proceedToCheckout() {
+  if (appState.cart.length === 0) {
+    showNotification('Your cart is empty', 'error');
+    return;
+  }
+  
+  loadCheckoutSummary();
+  toggleCart(); // Close cart sidebar
+  showModal('checkoutModal');
+}
+
+function loadCheckoutSummary() {
+  const container = document.getElementById('checkoutSummary');
+  if (!container) return;
+  
+  const total = appState.cart.reduce((sum, course) => sum + course.price, 0);
+  
+  container.innerHTML = `
+    ${appState.cart.map(course => `
+      <div class="summary-item">
+        <span>${course.title}</span>
+        <span>$${course.price}</span>
+      </div>
+    `).join('')}
+    <div class="summary-total">
+      <span>Total:</span>
+      <span>$${total.toFixed(2)}</span>
+    </div>
+  `;
+}
+
+function buyCourse(courseId) {
+  addToCart(courseId);
+  if (appState.cart.some(item => item.id === courseId)) {
+    proceedToCheckout();
+  }
+}
+
+function handleCheckout(e) {
+  e.preventDefault();
+  
+  // Simulate payment processing
+  showNotification('Processing payment...', 'success');
+  
+  setTimeout(() => {
+    // Add courses to user's purchased courses
+    const courseIds = appState.cart.map(course => course.id);
+    appState.currentUser.purchasedCourses.push(...courseIds);
+    
+    // Initialize progress for new courses
+    courseIds.forEach(id => {
+      appState.currentUser.progress[id] = 0;
+    });
+    
+    // Clear cart
+    appState.cart = [];
+    updateCartCount();
+    
+    hideModal('checkoutModal');
+    showNotification('Purchase completed successfully!', 'success');
+    showView('dashboard');
+  }, 2000);
+}
+
+// Dashboard Functions
+function loadDashboard() {
+  showDashboardSection('profile');
+  loadUserProfile();
+}
+
+function showDashboardSection(section) {
+  // Hide all sections
+  document.querySelectorAll('.dashboard-section').forEach(sec => {
+    sec.classList.add('hidden');
+  });
+  
+  // Remove active class from menu items
+  document.querySelectorAll('.dashboard-layout .menu-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // Show selected section
+  const targetSection = document.getElementById(section + 'Section');
+  if (targetSection) {
+    targetSection.classList.remove('hidden');
+  }
+  
+  // Add active class to clicked menu item (if event is available)
+  if (window.event && window.event.target) {
+    window.event.target.classList.add('active');
+  }
+  
+  // Load section-specific data
+  switch(section) {
+    case 'profile':
+      loadUserProfile();
+      break;
+    case 'courses':
+      loadUserCourses();
+      break;
+    case 'progress':
+      loadUserProgress();
+      break;
+    case 'orders':
+      loadUserOrders();
+      break;
+  }
+}
+
+function loadUserProfile() {
+  if (!appState.currentUser) return;
+  
+  const profileName = document.getElementById('profileName');
+  const profileEmail = document.getElementById('profileEmail');
+  const profileJoinDate = document.getElementById('profileJoinDate');
+  
+  if (profileName) profileName.value = appState.currentUser.name;
+  if (profileEmail) profileEmail.value = appState.currentUser.email;
+  if (profileJoinDate) profileJoinDate.value = appState.currentUser.joinDate;
+}
+
+function updateProfile() {
+  const profileName = document.getElementById('profileName');
+  if (!profileName) return;
+  
+  const name = profileName.value;
+  appState.currentUser.name = name;
+  
+  const userNameElement = document.getElementById('userName');
+  if (userNameElement) {
+    userNameElement.textContent = name;
+  }
+  
+  showNotification('Profile updated successfully', 'success');
+}
+
+function loadUserCourses() {
+  const container = document.getElementById('myCourses');
+  if (!container) return;
+  
+  const userCourses = appData.courses.filter(course => 
+    appState.currentUser.purchasedCourses.includes(course.id)
+  );
+  
+  if (userCourses.length === 0) {
+    container.innerHTML = '<p>You haven\'t purchased any courses yet.</p>';
+    return;
+  }
+  
+  container.innerHTML = userCourses.map(course => {
+    const progress = appState.currentUser.progress[course.id] || 0;
+    return `
+      <div class="my-course-item">
+        <div class="my-course-image">📚</div>
+        <div class="my-course-info">
+          <div class="my-course-title">${course.title}</div>
+          <div class="my-course-instructor">by ${course.instructor}</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%"></div>
+          </div>
+          <small>${progress}% complete</small>
+        </div>
+        <button class="btn btn--primary" onclick="startCourse(${course.id})">Continue</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function loadUserProgress() {
+  const container = document.getElementById('progressOverview');
+  if (!container) return;
+  
+  const userCourses = appData.courses.filter(course => 
+    appState.currentUser.purchasedCourses.includes(course.id)
+  );
+  
+  const totalProgress = userCourses.length > 0 
+    ? userCourses.reduce((sum, course) => sum + (appState.currentUser.progress[course.id] || 0), 0) / userCourses.length
+    : 0;
+  
+  container.innerHTML = `
+    <div class="progress-stats">
+      <div class="stat-card">
+        <h3>${userCourses.length}</h3>
+        <p>Enrolled Courses</p>
+      </div>
+      <div class="stat-card">
+        <h3>${Math.round(totalProgress)}%</h3>
+        <p>Overall Progress</p>
+      </div>
+      <div class="stat-card">
+        <h3>${userCourses.filter(c => (appState.currentUser.progress[c.id] || 0) === 100).length}</h3>
+        <p>Completed Courses</p>
+      </div>
+    </div>
+    <div class="progress-details">
+      <h3>Course Progress</h3>
+      ${userCourses.map(course => {
+        const progress = appState.currentUser.progress[course.id] || 0;
+        return `
+          <div class="progress-item">
+            <div class="progress-course-info">
+              <strong>${course.title}</strong>
+              <span>${progress}% complete</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${progress}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function loadUserOrders() {
+  const container = document.getElementById('orderHistory');
+  if (!container) return;
+  
+  // Simulate order history based on purchased courses
+  const orders = appState.currentUser.purchasedCourses.map((courseId, index) => {
+    const course = appData.courses.find(c => c.id === courseId);
+    return {
+      id: index + 1,
+      date: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      course: course,
+      amount: course.price
+    };
+  });
+  
+  if (orders.length === 0) {
+    container.innerHTML = '<p>No orders found.</p>';
+    return;
+  }
+  
+  container.innerHTML = `
+    <div class="orders-list">
+      ${orders.map(order => `
+        <div class="order-item">
+          <div class="order-info">
+            <strong>Order #${order.id}</strong>
+            <span>${order.date}</span>
+          </div>
+          <div class="order-course">${order.course.title}</div>
+          <div class="order-amount">$${order.amount}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function startCourse(courseId) {
+  // Simulate course player
+  const course = appData.courses.find(c => c.id === courseId);
+  showNotification(`Starting "${course.title}"`, 'success');
+  
+  // Simulate progress update
+  const currentProgress = appState.currentUser.progress[courseId] || 0;
+  const newProgress = Math.min(currentProgress + 10, 100);
+  appState.currentUser.progress[courseId] = newProgress;
+  
+  // Reload the current section to show updated progress
+  loadUserCourses();
+}
+
+// Admin Functions
+function loadAdminPanel() {
+  showAdminSection('overview');
+  loadAdminOverview();
+}
+
+function showAdminSection(section) {
+  // Hide all sections
+  document.querySelectorAll('.admin-section').forEach(sec => {
+    sec.classList.add('hidden');
+  });
+  
+  // Remove active class from menu items
+  document.querySelectorAll('.admin-layout .menu-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // Show selected section
+  const targetSection = document.getElementById(section + 'Section');
+  if (targetSection) {
+    targetSection.classList.remove('hidden');
+  }
+  
+  // Add active class to clicked menu item (if event is available)
+  if (window.event && window.event.target) {
+    window.event.target.classList.add('active');
+  }
+  
+  // Load section-specific data
+  switch(section) {
+    case 'overview':
+      loadAdminOverview();
+      break;
+    case 'manage-courses':
+      loadCoursesTable();
+      break;
+    case 'add-course':
+      loadAddCourseForm();
+      break;
+    case 'users':
+      loadUsersTable();
+      break;
+  }
+}
+
+function loadAdminOverview() {
+  const totalRevenue = appData.users
+    .filter(u => u.role === 'user')
+    .reduce((sum, user) => {
+      return sum + user.purchasedCourses.reduce((courseSum, courseId) => {
+        const course = appData.courses.find(c => c.id === courseId);
+        return courseSum + (course ? course.price : 0);
+      }, 0);
+    }, 0);
+  
+  const totalStudentsElement = document.getElementById('totalStudents');
+  const totalCoursesElement = document.getElementById('totalCourses');
+  const totalRevenueElement = document.getElementById('totalRevenue');
+  const totalInstructorsElement = document.getElementById('totalInstructors');
+  
+  if (totalStudentsElement) totalStudentsElement.textContent = appData.stats.totalStudents.toLocaleString();
+  if (totalCoursesElement) totalCoursesElement.textContent = appData.courses.length;
+  if (totalRevenueElement) totalRevenueElement.textContent = `$${totalRevenue.toFixed(2)}`;
+  if (totalInstructorsElement) totalInstructorsElement.textContent = appData.stats.totalInstructors;
+}
+
+function loadCoursesTable() {
+  const container = document.getElementById('coursesTable');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <div class="table-header">
+      <div>Course</div>
+      <div>Category</div>
+      <div>Price</div>
+      <div>Students</div>
+      <div>Actions</div>
+    </div>
+    ${appData.courses.map(course => `
+      <div class="table-row">
+        <div>
+          <strong>${course.title}</strong>
+          <br><small>by ${course.instructor}</small>
+        </div>
+        <div>${course.category}</div>
+        <div>$${course.price}</div>
+        <div>${course.students.toLocaleString()}</div>
+        <div class="table-actions">
+          <button class="btn btn--outline btn-small" onclick="editCourse(${course.id})">Edit</button>
+          <button class="btn btn--outline btn-small" onclick="deleteCourse(${course.id})">Delete</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function loadAddCourseForm() {
+  const categorySelect = document.querySelector('#addCourseForm select[name="category"]');
+  if (!categorySelect) return;
+  
+  categorySelect.innerHTML = '<option value="">Select Category</option>' +
+    appData.categories.map(cat => `<option value="${cat.name}">${cat.name}</option>`).join('');
+}
+
+function handleAddCourse(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  
+  const newCourse = {
+    id: Math.max(...appData.courses.map(c => c.id)) + 1,
+    title: formData.get('title'),
+    description: formData.get('description'),
+    price: parseFloat(formData.get('price')),
+    originalPrice: parseFloat(formData.get('price')) * 1.5,
+    category: formData.get('category'),
+    instructor: formData.get('instructor'),
+    duration: formData.get('duration'),
+    lessons: Math.floor(Math.random() * 100) + 20,
+    students: Math.floor(Math.random() * 1000),
+    rating: 4.0 + Math.random() * 1,
+    level: formData.get('level'),
+    image: '/api/placeholder/400/250',
+    featured: false,
+    modules: [
+      'Introduction',
+      'Core Concepts',
+      'Practical Applications',
+      'Advanced Topics',
+      'Final Project'
+    ]
+  };
+  
+  appData.courses.push(newCourse);
+  e.target.reset();
+  showNotification('Course added successfully!', 'success');
+  showAdminSection('manage-courses');
+}
+
+function editCourse(courseId) {
+  showNotification('Edit functionality would open course edit form', 'success');
+}
+
+function deleteCourse(courseId) {
+  if (confirm('Are you sure you want to delete this course?')) {
+    appData.courses = appData.courses.filter(c => c.id !== courseId);
+    loadCoursesTable();
+    showNotification('Course deleted successfully', 'success');
+  }
+}
+
+function loadUsersTable() {
+  const container = document.getElementById('usersTable');
+  if (!container) return;
+  
+  const users = appData.users.filter(u => u.role === 'user');
+  
+  container.innerHTML = `
+    <div class="table-header">
+      <div>User</div>
+      <div>Email</div>
+      <div>Join Date</div>
+      <div>Courses</div>
+      <div>Actions</div>
+    </div>
+    ${users.map(user => `
+      <div class="table-row">
+        <div>${user.name}</div>
+        <div>${user.email}</div>
+        <div>${user.joinDate}</div>
+        <div>${user.purchasedCourses.length}</div>
+        <div class="table-actions">
+          <button class="btn btn--outline btn-small" onclick="viewUser(${user.id})">View</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function viewUser(userId) {
+  const user = appData.users.find(u => u.id === userId);
+  showNotification(`Viewing user: ${user.name}`, 'success');
+}
+
+// Modal Functions
+function showModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('hidden');
+  }
+}
+
+function hideModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+}
+
+function closeAllModals() {
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.classList.add('hidden');
+  });
+}
+
+function showLogin() {
+  showModal('loginModal');
+}
+
+function showRegister() {
+  showModal('registerModal');
+}
+
+// Utility Functions
+function showNotification(message, type = 'success') {
+  const container = document.getElementById('notifications');
+  if (!container) return;
+  
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  
+  container.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function toggleMobileMenu() {
+  const navbarMenu = document.getElementById('navbarMenu');
+  if (navbarMenu) {
+    navbarMenu.classList.toggle('show');
+  }
+}
