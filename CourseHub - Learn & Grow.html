@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!-- saved from url=(0152)https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CourseHub - Learn &amp; Grow</title>
+    <link rel="stylesheet" href="./CourseHub - Learn &amp; Grow_files/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h2>CourseHub</h2>
+            </div>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="showView(&#39;homepage&#39;)">Home</a>
+                <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="showView(&#39;catalog&#39;)">Courses</a>
+                <div class="navbar-auth" id="navbarAuth">
+                    <button class="btn btn--outline" onclick="showLogin()">Login</button>
+                    <button class="btn btn--primary" onclick="showRegister()">Sign Up</button>
+                </div>
+                <div class="navbar-user hidden" id="navbarUser">
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒 <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <div class="user-menu">
+                        <button class="btn btn--outline" id="userMenuBtn">
+                            <span id="userName">User</span> ▼
+                        </button>
+                        <div class="user-dropdown" id="userDropdown" style="display: none;">
+                            <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="showView(&#39;dashboard&#39;)">Dashboard</a>
+                            <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-admin hidden" id="navbarAdmin">
+                    <button class="btn btn--secondary" onclick="showView(&#39;admin&#39;)">Admin Panel</button>
+                    <button class="btn btn--outline" onclick="logout()">Logout</button>
+                </div>
+            </div>
+            <button class="navbar-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Homepage -->
+    <div class="view" id="homepage">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Transform Your Career with Expert-Led Courses</h1>
+                    <p>Join 50,000+ students learning cutting-edge skills from industry professionals</p>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" onclick="showView(&#39;catalog&#39;)">Browse Courses</button>
+                        <button class="btn btn--outline btn--lg" onclick="showRegister()">Start Learning</button>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>50,000+</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>200+</h3>
+                        <p>Courses</p>
+                    </div>
+                    <div class="stat">
+                        <h3>45+</h3>
+                        <p>Instructors</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p>Success Rate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Courses -->
+        <section class="featured-courses">
+            <div class="container">
+                <h2>Featured Courses</h2>
+                <div class="courses-grid" id="featuredCourses">
+    <div class="course-card" onclick="showCourseDetail(1)">
+      <div class="course-image">📚 Course Image</div>
+      <div class="course-content">
+        <div class="course-header">
+          <h3 class="course-title">Complete Web Development Bootcamp</h3>
+          <p class="course-instructor">by Sarah Johnson</p>
+        </div>
+        <p class="course-description">Learn full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build 10+ real-world projects.</p>
+        <div class="course-meta">
+          <div class="course-stats">
+            <span>⏱️ 40 hours</span>
+            <span>👥 15,420</span>
+            <span>📊 Beginner</span>
+          </div>
+          <div class="rating">
+            <span class="stars">★★★★</span>
+            <span>4.8</span>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">
+            <span class="current-price">$99.99</span>
+            <span class="original-price">$199.99</span>
+          </div>
+          <button class="btn btn--primary" onclick="event.stopPropagation(); addToCart(1)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="course-card" onclick="showCourseDetail(2)">
+      <div class="course-image">📚 Course Image</div>
+      <div class="course-content">
+        <div class="course-header">
+          <h3 class="course-title">Python for Data Science</h3>
+          <p class="course-instructor">by Dr. Michael Chen</p>
+        </div>
+        <p class="course-description">Master Python programming for data analysis, machine learning, and visualization with pandas, numpy, and scikit-learn.</p>
+        <div class="course-meta">
+          <div class="course-stats">
+            <span>⏱️ 35 hours</span>
+            <span>👥 12,350</span>
+            <span>📊 Intermediate</span>
+          </div>
+          <div class="rating">
+            <span class="stars">★★★★</span>
+            <span>4.7</span>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">
+            <span class="current-price">$79.99</span>
+            <span class="original-price">$149.99</span>
+          </div>
+          <button class="btn btn--primary" onclick="event.stopPropagation(); addToCart(2)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="course-card" onclick="showCourseDetail(3)">
+      <div class="course-image">📚 Course Image</div>
+      <div class="course-content">
+        <div class="course-header">
+          <h3 class="course-title">AI &amp; Machine Learning Masterclass</h3>
+          <p class="course-instructor">by Prof. Emily Rodriguez</p>
+        </div>
+        <p class="course-description">Comprehensive course covering artificial intelligence, deep learning, neural networks, and practical AI applications.</p>
+        <div class="course-meta">
+          <div class="course-stats">
+            <span>⏱️ 60 hours</span>
+            <span>👥 8,750</span>
+            <span>📊 Advanced</span>
+          </div>
+          <div class="rating">
+            <span class="stars">★★★★</span>
+            <span>4.9</span>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">
+            <span class="current-price">$149.99</span>
+            <span class="original-price">$299.99</span>
+          </div>
+          <button class="btn btn--primary" onclick="event.stopPropagation(); addToCart(3)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <div class="container">
+                <h2>Popular Categories</h2>
+                <div class="categories-grid" id="categoriesGrid">
+    <div class="category-card" onclick="filterByCategory(&#39;Web Development&#39;)">
+      <div class="category-icon">🌐</div>
+      <h3 class="category-name">Web Development</h3>
+      <p class="category-count">45 courses</p>
+    </div>
+  
+    <div class="category-card" onclick="filterByCategory(&#39;Data Science&#39;)">
+      <div class="category-icon">📊</div>
+      <h3 class="category-name">Data Science</h3>
+      <p class="category-count">32 courses</p>
+    </div>
+  
+    <div class="category-card" onclick="filterByCategory(&#39;Artificial Intelligence&#39;)">
+      <div class="category-icon">🤖</div>
+      <h3 class="category-name">Artificial Intelligence</h3>
+      <p class="category-count">28 courses</p>
+    </div>
+  
+    <div class="category-card" onclick="filterByCategory(&#39;Digital Marketing&#39;)">
+      <div class="category-icon">📱</div>
+      <h3 class="category-name">Digital Marketing</h3>
+      <p class="category-count">35 courses</p>
+    </div>
+  
+    <div class="category-card" onclick="filterByCategory(&#39;Mobile Development&#39;)">
+      <div class="category-icon">📱</div>
+      <h3 class="category-name">Mobile Development</h3>
+      <p class="category-count">25 courses</p>
+    </div>
+  
+    <div class="category-card" onclick="filterByCategory(&#39;Cybersecurity&#39;)">
+      <div class="category-icon">🔒</div>
+      <h3 class="category-name">Cybersecurity</h3>
+      <p class="category-count">18 courses</p>
+    </div>
+  </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Students Say</h2>
+                <div class="testimonials-grid" id="testimonialsGrid">
+    <div class="testimonial-card">
+      <div class="testimonial-content">"This platform transformed my career! The courses are incredibly detailed and practical."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👤</div>
+        <div class="testimonial-name">Jessica Williams</div>
+        <div class="testimonial-role">Software Developer</div>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="testimonial-card">
+      <div class="testimonial-content">"Best investment I made for my professional development. Highly recommended!"</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👤</div>
+        <div class="testimonial-name">Mark Johnson</div>
+        <div class="testimonial-role">Data Analyst</div>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Course Catalog -->
+    <div class="view hidden" id="catalog">
+        <div class="container">
+            <div class="catalog-header">
+                <h1>Course Catalog</h1>
+                <div class="catalog-controls">
+                    <div class="search-box">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search courses...">
+                        <button class="btn btn--primary" onclick="searchCourses()">Search</button>
+                    </div>
+                    <div class="filters">
+                        <select class="form-control" id="categoryFilter" onchange="filterCourses()">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select class="form-control" id="levelFilter" onchange="filterCourses()">
+                            <option value="">All Levels</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                        <select class="form-control" id="sortFilter" onchange="filterCourses()">
+                            <option value="">Sort By</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="students">Most Popular</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-grid" id="catalogCourses">
+                <!-- Courses will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Detail -->
+    <div class="view hidden" id="courseDetail">
+        <div class="container">
+            <div class="course-detail-content" id="courseDetailContent">
+                <!-- Course details will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div class="view hidden" id="dashboard">
+        <div class="container">
+            <div class="dashboard-layout">
+                <div class="dashboard-sidebar">
+                    <div class="sidebar-menu">
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item active" onclick="showDashboardSection(&#39;profile&#39;)">Profile</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showDashboardSection(&#39;courses&#39;)">My Courses</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showDashboardSection(&#39;progress&#39;)">Progress</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showDashboardSection(&#39;orders&#39;)">Orders</a>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-section" id="profileSection">
+                        <h2>Profile Information</h2>
+                        <div class="profile-form">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="profileName">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="profileEmail" readonly="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Join Date</label>
+                                <input type="text" class="form-control" id="profileJoinDate" readonly="">
+                            </div>
+                            <button class="btn btn--primary" onclick="updateProfile()">Update Profile</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-section hidden" id="coursesSection">
+                        <h2>My Courses</h2>
+                        <div class="my-courses" id="myCourses">
+                            <!-- User courses will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="dashboard-section hidden" id="progressSection">
+                        <h2>Learning Progress</h2>
+                        <div class="progress-overview" id="progressOverview">
+                            <!-- Progress will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="dashboard-section hidden" id="ordersSection">
+                        <h2>Order History</h2>
+                        <div class="order-history" id="orderHistory">
+                            <!-- Orders will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="view hidden" id="admin">
+        <div class="container">
+            <div class="admin-layout">
+                <div class="admin-sidebar">
+                    <h3>Admin Panel</h3>
+                    <div class="sidebar-menu">
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item active" onclick="showAdminSection(&#39;overview&#39;)">Overview</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showAdminSection(&#39;manage-courses&#39;)">Manage Courses</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showAdminSection(&#39;add-course&#39;)">Add Course</a>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" class="menu-item" onclick="showAdminSection(&#39;users&#39;)">Users</a>
+                    </div>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-section" id="overviewSection">
+                        <h2>Dashboard Overview</h2>
+                        <div class="admin-stats">
+                            <div class="stat-card">
+                                <h3 id="totalStudents">0</h3>
+                                <p>Total Students</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="totalCourses">0</h3>
+                                <p>Total Courses</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="totalRevenue">$0</h3>
+                                <p>Total Revenue</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="totalInstructors">0</h3>
+                                <p>Instructors</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-section hidden" id="manageCoursesSection">
+                        <h2>Manage Courses</h2>
+                        <div class="courses-table" id="coursesTable">
+                            <!-- Courses table will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="admin-section hidden" id="addCourseSection">
+                        <h2>Add New Course</h2>
+                        <form class="course-form" id="addCourseForm">
+                            <div class="form-group">
+                                <label class="form-label">Course Title</label>
+                                <input type="text" class="form-control" name="title" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" name="description" rows="4" required=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Price ($)</label>
+                                <input type="number" class="form-control" name="price" step="0.01" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-control" name="category" required="">
+                                    <option value="">Select Category</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Instructor</label>
+                                <input type="text" class="form-control" name="instructor" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Duration</label>
+                                <input type="text" class="form-control" name="duration" placeholder="e.g., 40 hours" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Level</label>
+                                <select class="form-control" name="level" required="">
+                                    <option value="">Select Level</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn--primary">Add Course</button>
+                        </form>
+                    </div>
+                    <div class="admin-section hidden" id="usersSection">
+                        <h2>User Management</h2>
+                        <div class="users-table" id="usersTable">
+                            <!-- Users table will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="cart-sidebar hidden" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: $<span id="cartTotal">0.00</span></strong>
+            </div>
+            <button class="btn btn--primary btn--full-width" onclick="proceedToCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal hidden" id="loginModal">
+        <div class="modal-overlay" onclick="hideModal(&#39;loginModal&#39;)"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login</h3>
+                <button class="modal-close" onclick="hideModal(&#39;loginModal&#39;)">×</button>
+            </div>
+            <form class="modal-body" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" required="">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" required="">
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                <p class="modal-footer-text">
+                    Don't have an account? 
+                    <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="hideModal(&#39;loginModal&#39;); showRegister();">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal hidden" id="registerModal">
+        <div class="modal-overlay" onclick="hideModal(&#39;registerModal&#39;)"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Account</h3>
+                <button class="modal-close" onclick="hideModal(&#39;registerModal&#39;)">×</button>
+            </div>
+            <form class="modal-body" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" name="name" required="">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" required="">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" required="" minlength="6">
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                <p class="modal-footer-text">
+                    Already have an account? 
+                    <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/40c0c7ed4c625afd4279583cef0287e1/54a1f75b-6274-4172-8b23-6f4523a3d495/index.html#" onclick="hideModal(&#39;registerModal&#39;); showLogin();">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal hidden" id="checkoutModal">
+        <div class="modal-overlay" onclick="hideModal(&#39;checkoutModal&#39;)"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Checkout</h3>
+                <button class="modal-close" onclick="hideModal(&#39;checkoutModal&#39;)">×</button>
+            </div>
+            <form class="modal-body" id="checkoutForm">
+                <div class="checkout-sections">
+                    <div class="checkout-section">
+                        <h4>Billing Information</h4>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="fullName" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required="">
+                        </div>
+                    </div>
+                    <div class="checkout-section">
+                        <h4>Payment Information</h4>
+                        <div class="form-group">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-control" name="cardNumber" placeholder="1234 5678 9012 3456" required="">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Expiry</label>
+                                <input type="text" class="form-control" name="expiry" placeholder="MM/YY" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-control" name="cvv" placeholder="123" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-summary">
+                    <h4>Order Summary</h4>
+                    <div id="checkoutSummary"></div>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="notifications" id="notifications"></div>
+
+    <script src="./CourseHub - Learn &amp; Grow_files/app.js.download"></script>
+
+</body></html>
