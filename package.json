@@ -1,0 +1,46 @@
+{
+  "name": "course-selling-platform",
+  "version": "1.0.0",
+  "description": "A modern, fully-featured course selling platform with admin panel, user authentication, and payment integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server . -p 8000",
+    "predeploy": "echo 'Preparing deployment...'",
+    "deploy": "gh-pages -d .",
+    "test": "echo 'No tests specified'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/course-selling-platform.git"
+  },
+  "keywords": [
+    "course-selling",
+    "e-learning",
+    "education",
+    "web-app",
+    "javascript",
+    "html5",
+    "css3",
+    "responsive",
+    "admin-panel",
+    "authentication",
+    "shopping-cart",
+    "payment-integration"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/course-selling-platform/issues"
+  },
+  "homepage": "https://yourusername.github.io/course-selling-platform",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
